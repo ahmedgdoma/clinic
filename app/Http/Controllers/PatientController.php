@@ -21,8 +21,9 @@ class PatientController extends Controller
     public function completeProfile(){
 
         $pains = Pain::all()->pluck('name', 'id');
-        $patient = Patient::where('user_id', Auth::id())->first()->toArray();
+        $patient = Patient::where('user_id', Auth::id())->first();
         if($patient){
+            $patient = $patient->toArray();
             $patient['email'] = Auth::user()->email;
         }else{
             $patient = [];

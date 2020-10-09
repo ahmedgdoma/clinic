@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get('/', function () {
-    if(\Illuminate\Support\Facades\Auth::user()->role == 'patient' && is_null(\Illuminate\Support\Facades\Auth::user()->email)){
+    if(\Illuminate\Support\Facades\Auth::user() && \Illuminate\Support\Facades\Auth::user()->role == 'patient' && is_null(\Illuminate\Support\Facades\Auth::user()->email)){
         return redirect()->route('completeProfile');
     }
     return view('welcome');

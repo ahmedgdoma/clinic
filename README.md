@@ -36,7 +36,7 @@ set up your database and add credentials to `.env.example` file
                              && npm install
                              && npm run dev
                              && test -e ./.env && echo env file exists || cp .env.example .env
-                             && php artisan migrate
+                             && php artisan migrate --seed
                              && php artisan serve
 `
 

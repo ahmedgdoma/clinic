@@ -57,7 +57,7 @@
                 </div>
                 <div class="form-group">
                     {!! Form::label('gender', 'gender')!!}
-                    {!! Form::select('gender',['male'=>'male', 'female' => 'female'], null, ['class'=>"form-control", 'placeholder' =>'select pain']) !!}
+                    {!! Form::select('gender',['male'=>'male', 'female' => 'female'], null, ['class'=>"form-control", 'placeholder' =>'select gender']) !!}
                 </div>
                 <div class="form-group">
                     {!! Form::label('occupation', 'occupation')!!}

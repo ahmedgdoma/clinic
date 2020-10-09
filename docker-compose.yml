@@ -1,0 +1,55 @@
+version: "3.2"
+
+services:
+  mysql:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: on-failure
+    environment:
+      MYSQL_DATABASE: clinic
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - sqlvolume:/var/lib/mysql
+
+
+  laravel:
+    build:
+        context: .
+        dockerfile: Dockerfile
+    depends_on:
+      - mysql
+    links:
+      - mysql
+    ports:
+      - 8891:8000
+    restart: always
+    volumes:
+      - ./:/var/www/html
+
+    command: bash -c "composer install
+      && npm install
+      && npm run dev
+      && test -e ./.env && echo env file exists || cp .env.example .env
+      && php artisan migrate
+      && php artisan serve --host=0.0.0.0 --port=8000 --no-ansi"
+
+
+
+  phpmyadmin:
+      image: phpmyadmin/phpmyadmin
+      ports:
+        - 8893:80
+      restart: always
+      links:
+        - mysql
+      depends_on:
+        - mysql
+      environment:
+          PMA_HOST: mysql
+          PMA_ARBITRARY: 1
+      volumes:
+        - /sessions
+
+
+volumes:
+  sqlvolume:

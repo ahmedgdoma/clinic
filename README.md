@@ -43,6 +43,8 @@ set up your database and add credentials to `.env.example` file
 
 then visit http://localhost:8000 for application
 
+register for patient and complete profile
+
 
 
 
